@@ -8,16 +8,17 @@ import time
 import sys
 import random
 import pandas as pd
-
-sys.stdout = open("T3_same_as_solution_e2.txt","w")
+stdoutOrigin = sys.stdout
+sys.stdout = open("run1.txt","w")
 randomized = 'Random weight ratios'
 one_to_one = 'One to one weight ratios'
 same_as_solution = 'Same as solution weight ratios'
 #####################
-number_of_simulations = 100
+number_of_simulations = 10
 number_of_sequence_blocks = 7
 number_of_rearrangements = 6
 type_of_weight_ratio = one_to_one
+name_of_csv_file = 'run1.csv'
 
 
 
@@ -25,7 +26,7 @@ type_of_weight_ratio = one_to_one
 df = pd.DataFrame(columns=['Operation_sequences', 'Solution_sequence','True_solution_found','Genolve_time', 'Total_time'])
 
 
-t0 = time.time()
+
 
 get_adjacencies = Extremities_and_adjacencies()
 
@@ -33,7 +34,7 @@ number_of_solutions_found = 0
 get_adjacencies_and_genomes = Extremities_and_adjacencies()
 
 for i in range(0, number_of_simulations):
-
+    t0 = time.time()
     #EVOLVER: target genome is being evolved into the source genome
     target_genome = GenomeEvolver.create_target_genome(number_of_sequence_blocks)
     evolving_genome = Evolve(target_genome)
@@ -218,4 +219,21 @@ for i in range(0, number_of_simulations):
     network.clear()
 
 
-df.to_csv('DataFrame_1.csv')
+df.to_csv(name_of_csv_file)
+
+#OUTPUT - run info
+##############################
+print("################################################################")
+print()
+print('Name of corresponding csv file: ', name_of_csv_file)
+print('Number of simulations: ', number_of_simulations)
+print('Number of sequence blocks: ', number_of_sequence_blocks)
+print('Number of rearrangements: ', number_of_rearrangements)
+print('Type of weighting system: ', type_of_weight_ratio)
+print()
+print("################################################################")
+
+sys.stdout.close()
+sys.stdout=stdoutOrigin
+
+

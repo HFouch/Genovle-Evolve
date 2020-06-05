@@ -25,8 +25,8 @@ def build_hash_table(current_node, hash_table, adjacenciesB, weights):
             # if it is a trp1 type operation
             if node.join_adjacency in operation[0]:
                 operation_type = 'trp1'
-                #operation_weight = 0.5 * weights[1]
-                operation_weight = 1 * weights[1]
+                operation_weight = 0.5 * weights[1]
+                #operation_weight = 1 * weights[1]
 
             # else it is a trp2 type operation
             else:
@@ -76,8 +76,8 @@ def build_hash_table(current_node, hash_table, adjacenciesB, weights):
                 child.find_chromosomes(child.state)
 
                 if len(child.circular_chromosomes) != 0:  # if a circularization occurred
-                    #node.children_weights.append(0.5 * weights[1])
-                    node.children_weights.append(1 * weights[1])
+                    node.children_weights.append(0.5 * weights[1])
+                    #node.children_weights.append(1 * weights[1])
                     node.children_operations.append((operation, 'trp0'))
 
                     if type(operation[-1][0]) is tuple and type(operation[-1][1]) is tuple:
@@ -175,8 +175,8 @@ def build_hash_table(current_node, hash_table, adjacenciesB, weights):
                     hash_table.update({hash_key: child})
                     node.children.append(child)
                     node.children_operations.append((operation, 'trp0'))
-                    #node.children_weights.append(0.5 * weights[1])
-                    node.children_weights.append(1 * weights[1])
+                    node.children_weights.append(0.5 * weights[1])
+                    #node.children_weights.append(1 * weights[1])
 
                     build_hash_table(child, hash_table, adjacenciesB, weights)
 
